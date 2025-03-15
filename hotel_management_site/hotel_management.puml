@@ -1,0 +1,233 @@
+@startuml hotel_management
+title Hotel Management System
+
+entity "Hotel Chains" as hotelChains {
+  * _id : string [PK]
+  --
+  name : string
+  addressLine1 : string
+  addressLine2 : string
+  city : string
+  pincode : string
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Hotels" as hotel {
+  * _id : string [PK]
+  --
+  name : string
+  hotelChain : ObjectId [FK]
+  description : string
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Users" as users {
+  * _id : string [PK]
+  --
+  name : string
+  accessType : enum("superAdmin", "subAdmin", "staff")
+  managesHotels : ObjectId[] [FK]
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Menu" as menu {
+  * _id : string [PK]
+  --
+  menuOf : ObjectId [FK]
+  name : string
+  menuItems : ObjectId[] [FK]
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Menu Items" as menuItems {
+  * _id : string [PK]
+  --
+  name : string
+  category : enum("starters", "mainCourse", "drinks", "desserts")
+  price : float
+  rating : enum("1", "2", "3", "4", "5")
+  toppings : ObjectId[] [FK]
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Menu Toppings" as menuToppings {
+  * _id : string [PK]
+  --
+  name : string
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Hotel Ratings" as hotelRatings {
+  * _id : string [PK]
+  --
+  ratingOf : ObjectId [FK]
+  ratedBy : ObjectId [FK]
+  rating : enum("1", "2", "3", "4", "5")
+  review : string
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Loyalty Program" as loyaltyProgram {
+  * _id : string [PK]
+  --
+  programName : string
+  description : string
+  benefits : string
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Bookings" as bookings {
+  * _id : string [PK]
+  --
+  bookingDate : Date
+  customerId : ObjectId [FK]
+  hotelId : ObjectId [FK]
+  roomType : string
+  status : enum("confirmed", "pending", "cancelled")
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Customers" as customers {
+  * _id : string [PK]
+  --
+  name : string
+  email : string
+  phone : string
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Rooms" as rooms {
+  * _id : string [PK]
+  --
+  hotelId : ObjectId [FK]
+  roomNumber : string
+  type : enum("single", "double", "suite")
+  price : float
+  occupancyStatus : enum("available", "occupied", "cleaning", "maintenance")
+  amenities : ObjectId[]
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Staff" as staff {
+  * _id : string [PK]
+  --
+  name : string
+  role : enum("receptionist", "housekeeping", "chef", "manager")
+  assignedHotel : ObjectId [FK]
+  salary : float
+  workingHours : string
+  contact : string
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Transactions" as transactions {
+  * _id : string [PK]
+  --
+  customerId : ObjectId [FK]
+  bookingId : ObjectId [FK]
+  amount : float
+  status : enum("paid", "pending", "refunded")
+  method : enum("card", "UPI", "net banking", "cash")
+  transactionDate : Date
+}
+
+entity "Events" as events {
+  * _id : string [PK]
+  --
+  hotelId : ObjectId [FK]
+  eventName : string
+  eventDate : Date
+  attendees : int
+  status : enum("confirmed", "pending", "cancelled")
+}
+
+entity "Subscription Plans" as subscriptionPlans {
+  * _id : string [PK]
+  --
+  hotelId : ObjectId [FK]
+  planName : enum("basic", "premium", "enterprise")
+  price : float
+  duration : enum("monthly", "yearly")
+  features : string[]
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "AI Recommendations" as aiRecommendations {
+  * _id : string [PK]
+  --
+  customerId : ObjectId [FK]
+  recommendedHotels : ObjectId[]
+  recommendedRooms : ObjectId[]
+  recommendedMenuItems : ObjectId[]
+  createdAt : Date
+  updatedAt : Date
+}
+
+entity "Order Tracking" as orderTracking {
+  * _id : string [PK]
+  --
+  orderId : ObjectId [FK]
+  customerId : ObjectId [FK]
+  status : enum("placed", "preparing", "out for delivery", "delivered")
+  estimatedDeliveryTime : DateTime
+  lastUpdated : DateTime
+}
+
+entity "Dynamic Pricing" as dynamicPricing {
+  * _id : string [PK]
+  --
+  hotelId : ObjectId [FK]
+  roomType : string
+  basePrice : float
+  surgeMultiplier : float
+  adjustedPrice : float
+  lastUpdated : DateTime
+}
+
+entity "Customer Support Chatbot" as customerSupportChatbot {
+  * _id : string [PK]
+  --
+  customerId : ObjectId [FK]
+  query : string
+  response : string
+  createdAt : Date
+  updatedAt : Date
+}
+
+// Define relationships
+hotelChains ||--|{ hotel
+hotel ||--|{ rooms
+hotel ||--|{ bookings
+hotel ||--|{ menu
+hotel ||--|{ staff
+hotel ||--|{ events
+hotel ||--|{ subscriptionPlans
+
+users ||--|| hotel : manages
+menu ||--|{ menuItems
+menuItems ||--|{ menuToppings
+customers ||--|{ bookings
+customers ||--|{ hotelRatings
+customers ||--|{ aiRecommendations
+customers ||--|{ transactions
+customers ||--|{ orderTracking
+bookings ||--|{ transactions
+bookings ||--|| orderTracking
+aiRecommendations ||--|{ hotel
+aiRecommendations ||--|{ rooms
+aiRecommendations ||--|{ menuItems
+transactions ||--|| customerSupportChatbot
+@enduml
