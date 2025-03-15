@@ -1,0 +1,57 @@
+my-hotel-management/
+│── public/                      # Static assets (images, icons, etc.)
+│── src/                         # Main source folder
+│   │── app/                     # Next.js 13+ App Router
+│   │   │── layout.js            # Root layout file
+│   │   │── page.js              # Homepage
+│   │   ├── hotels/              # Hotel pages
+│   │   ├── menu/                # Menu and items
+│   │   ├── auth/                # Authentication pages
+│   │   ├── bookings/            # Booking pages
+│   │   ├── dashboard/           # Admin dashboard
+│   │   └── orders/              # Order tracking
+│   │── components/              # Reusable UI components
+│   │   ├── Auth/                # Authentication components
+│   │   ├── Dashboard/           # Admin dashboard components
+│   │   ├── UI/                  # Buttons, Modals, etc.
+│   │── lib/                     # Helper functions & API calls
+│   │   ├── firebase.js          # Firebase authentication setup
+│   │   ├── fetchHotels.js       # Fetch hotels from PostgreSQL
+│   │   ├── fetchRecommendations.js # Fetch AI Recommendations from MongoDB
+│   │── services/                # API Services
+│   │   ├── postgres/            # PostgreSQL queries (Prisma)
+│   │   │   ├── hotelService.js  # Hotel DB Service
+│   │   │   ├── menuService.js   # Menu DB Service
+│   │   ├── mongo/               # MongoDB queries (Mongoose)
+│   │   │   ├── aiService.js     # AI Recommendations API calls
+│   │   ├── flask/               # AI Models Integration
+│   │   │   ├── aiHotelRecommender.js # Calls Flask AI Model
+│   │   │   ├── chatbot.js       # Calls Flask AI Chatbot
+│   │── middleware/              # Middleware (Auth, Logging)
+│   │   ├── authMiddleware.js    # Protect Routes
+│   │   ├── adminMiddleware.js   # Admin Access Control
+│   │── context/                 # React Context API for state management
+│   │   ├── AuthContext.js       # Authentication State
+│   │   ├── HotelContext.js      # Hotels State
+│   │── database/                # Database configurations
+│   │   ├── prismaClient.js      # PostgreSQL Prisma Client
+│   │   ├── mongooseConnect.js   # MongoDB Mongoose Connection
+│   │── utils/                   # Helper utilities
+│   │   ├── formatDate.js        # Date formatting utility
+│   │   ├── constants.js         # App-wide constants
+│── pages/                       # For API Routes (Next.js API)
+│   ├── api/
+│   │   ├── auth/                # Firebase Auth APIs
+│   │   │   ├── login.js         # Login API
+│   │   │   ├── register.js      # Register API
+│   │   ├── hotels/              # PostgreSQL APIs
+│   │   │   ├── index.js         # Fetch all hotels
+│   │   │   ├── [id].js          # Fetch hotel by ID
+│   │   ├── recommendations/     # AI Recommendations (MongoDB)
+│   │   │   ├── index.js         # Fetch recommendations
+│   │   ├── ai/                  # AI Flask API Calls
+│   │   │   ├── chatbot.js       # Chatbot API
+│── .env.local                   # Environment Variables
+│── next.config.js               # Next.js Config
+│── package.json                  # Dependencies
+│── README.md                     # Documentation
