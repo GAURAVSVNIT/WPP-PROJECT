@@ -1,3 +1,4 @@
+"use client";
 const FormContainer = ({ title, children }) => {
     return (
         <div className="bg-gray-700 p-8 rounded-lg shadow-md w-full max-w-lg">

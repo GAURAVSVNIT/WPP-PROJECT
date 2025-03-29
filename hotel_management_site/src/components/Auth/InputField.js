@@ -1,3 +1,4 @@
+"use client";
 const InputField = ({ label, type, value, onChange }) => {
     return (
         <div className="flex flex-col space-y-2">
