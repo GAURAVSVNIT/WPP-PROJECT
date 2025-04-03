@@ -2,6 +2,7 @@
   "name": "hotel_management_site",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -21,15 +22,14 @@
     "next": "^15.2.4",
     "nodemailer": "^6.10.0",
     "prettier": "^3.5.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.2.2",
+    "eslint": "^9.2.0",
+    "eslint-config-next": "^15.2.4",
     "tailwindcss": "^4"
   }
 }
