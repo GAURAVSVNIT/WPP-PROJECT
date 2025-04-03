@@ -5,16 +5,17 @@ import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase"; // Ensure you have a correct Firebase config file
 import { doc, getDoc, setDoc } from "firebase/firestore";
+<<<<<<< HEAD
 import { firestore } from "./firebase/firebase"; // Import firestore separately
 import Navbar from "@/components/Home/Navbar.js";
 import MainSection from "@/components/Home/MainSection.js";
 import ContentSection from "@/components/Home/ContentSection.js";
 import Footer from "@/components/Home/Footer.js";
 import { configDotenv } from "dotenv";
+=======
+import { firestore } from "@/lib/firebase"; // Import firestore separately
+>>>>>>> parent of e57d48b (Added Authentication API)
 
-configDotenv({
-  path: ".env.local",
-});
 const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -40,30 +41,28 @@ const HomePage = () => {
 
             // Remove registration data from local storage
             localStorage.removeItem("registrationData");
-          }``
+          }
           setUser(user);
+          router.push("/dashboard");
+        } else {
+          setUser(null);
+          router.push("/auth/login");
         }
+      } else {
+        setUser(null);
+        router.push("/auth/login");
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [router]);
 
   if (loading) {
     return <p>Loading...</p>;
   }
-  return (
-    <div className="overflow-y-auto">
-      <Navbar />
-      {/* Give some padding at the top to account for the fixed navbar */}
-      <main className="pt-20">
-        <MainSection />
-        <ContentSection />
-      </main>
-      <Footer />
-    </div>
-  );
+
+  return <div>{user ? "Redirecting to dashboard..." : "Redirecting to login..."}</div>;
 };
 
 export default HomePage;

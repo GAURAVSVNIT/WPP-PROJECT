@@ -14,24 +14,8 @@ my-hotel-management/
 │   │   ├── hotels/              # Hotel pages
 │   │   ├── menu/                # Menu and items
 │   │   ├── auth/                # Authentication pages
-│   │   │   ├── login/           # Login page
-│   │   │   |    ├── page.js     
-│   │   │   ├── user-register/   # Registration page User
-│   │   │   |    ├── page.js    
-│   │   │   ├── admin-register/  # Registration page Admin
-│   │   │   |    ├── page.js
-│   │   │   ├── change-password/ # Password recovery page
-│   │   │   |    ├── page.js
-│   │   ├── profile/             # User profile pages
 │   │   ├── bookings/            # Booking pages
 │   │   ├── dashboard/           # Admin dashboard
-|   |   |    ├── page.js         # Admin dashboard page
-│   │   │    ├── users/          # Admin dashboard layout
-│   │   │    ├── hotels/         # Admin hotel management
-│   │   │    ├── menu/           # Admin menu management
-│   │   │    ├── orders/         # Admin order management
-│   │   |    ├── settings/       # Dashboard Settings Page
-│   │   ├── recommendations/     # AI Recommendations
 │   │   └── orders/              # Order tracking
 │   │── firebase/               # Firebase configuration and authentication
 │   │   ├── functions/    # Firebase configuration
@@ -39,14 +23,6 @@ my-hotel-management/
 │   │   ├── firebaseAdmin.js       # Firebase configuration file
 │   │── components/              # Reusable UI components
 │   │   ├── Auth/                # Authentication components
-│   │   │    ├── Button.js
-│   │   │    ├── Inputfield.js
-│   │   │    ├── FormContent.js
-│   │   ├── Home/                # Homepage components
-│   │   │    ├── ContentSection.js
-│   │   │    ├── Footer.js
-│   │   │    ├── MianSection.js
-│   │   │    ├── Navbar.js
 │   │   ├── Dashboard/           # Admin dashboard components
 │   │   ├── UI/                  # Buttons, Modals, etc.
 │   │── lib/                     # Helper functions & API calls
