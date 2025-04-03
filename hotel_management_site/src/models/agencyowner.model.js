@@ -1,4 +1,4 @@
-import { firestore } from "@/lib/firebase.js"; // Import the Firestore instance from your Firebase configuration
+import { firestore } from "../firebase/firebase.js"; // Import the Firestore instance from your Firebase configuration
 
 class AgencyOwnerModel {
   // Create a new agency owner in the "agencyOwners" collection
@@ -15,7 +15,8 @@ class AgencyOwnerModel {
 
   // Get an agency owner by email from the "agencyOwners" collection
   static async getAgencyByEmail(email) {
-    const snapshot = await firestore.collection("agencyOwners").where("ownerEmail", "==", email).get();
+    const q = query(collection(firestore, "agencyOwners"), where("ownerEmail", "==", email));
+    const snapshot = await getDocs(q);
     if (snapshot.empty) return null;
     return snapshot.docs[0].data();
   }

@@ -1,4 +1,4 @@
-import { auth } from "@/lib/firebase";
+import { auth } from "../../../src/app/firebase/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
 
 export default async function handler(req, res) {

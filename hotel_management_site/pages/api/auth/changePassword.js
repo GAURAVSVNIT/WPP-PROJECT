@@ -1,5 +1,5 @@
 // pages/api/auth/changePassword.js
-import { auth } from "@/lib/firebaseAdmin"; // Use admin SDK for verifyIdToken
+import { auth } from "../../../src/app/firebase/firebaseAdmin"; // Use admin SDK for verifyIdToken
 
 export default async function handler(req, res) {
   if (req.method !== "PUT") {

@@ -1,5 +1,5 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = 
@@ -19,5 +19,11 @@ const auth = getAuth(app);
 const firestore = getFirestore(app);
 
 const googleProvider = new GoogleAuthProvider();
+// Connect Firebase services to the local emulators (only in development)
+if (process.env.NEXT_PUBLIC_ENV === "development") {
+    console.log("Using Firebase Emulators...");
+    connectFirestoreEmulator(firestore, "localhost", 8080);
+    connectAuthEmulator(auth, "http://localhost:9099");
+  }
 export { auth, firestore, app, googleProvider };
 

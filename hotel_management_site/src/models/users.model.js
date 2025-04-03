@@ -1,54 +1,42 @@
-// import { firestore } from "@/lib/firebase.js"; 
-// import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
-// // import { auth } from "@/lib/firebaseAdmin"; 
-
-// class UserModel {
-//   // Create a new user in the "users" collection
-//   static async createUser(userData) {
-//     const userRef = firestore.
-//     const data = {
-//       ...userData,
-//       createdAt: new Date(),
-//       updatedAt: new Date(),
-//     };
-//     await userRef.set(data);
-//     return userRef.id;
-//   }
-
-//   // Get a user by email from the "users" collection
-//   static async getUserByEmail(email) {
-//     const snapshot = await firestore.collection("users").where("email", "==", email).get();
-//     if (snapshot.empty) return null;
-//     return snapshot.docs[0].data();
-//   }
-// }
-
-// export default UserModel;
-// src/models/users.model.js
-import { firestore } from "@/lib/firebase.js";
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { firestore } from "@/firebase/firebase"; // Ensure correct import path
+import { collection, query, where, getDocs, addDoc, doc, updateDoc } from "firebase/firestore";
 
 class UserModel {
-  // Get a user by email from the "users" collection using modular SDK
+  // Get a user by email from the "users" collection
   static async getUserByEmail(email) {
     const usersRef = collection(firestore, "users");
     const q = query(usersRef, where("email", "==", email));
     const snapshot = await getDocs(q);
     if (snapshot.empty) return null;
-    return snapshot.docs[0].data();
+    
+    const docData = snapshot.docs[0].data();
+    return { id: snapshot.docs[0].id, ...docData };
   }
 
-  // Create a new user in the "users" collection using modular SDK
+  // Create a new user in the "users" collection
   static async createUser(userData) {
     const usersRef = collection(firestore, "users");
     const data = {
       ...userData,
+      emailVerified: userData.emailVerified ?? false, // default to false
+      isGoogleUser: userData.isGoogleUser ?? false,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
     const docRef = await addDoc(usersRef, data);
     return docRef.id;
   }
+
+  // Update a user's document
+  static async updateUser(userId, updateData) {
+    const userRef = doc(firestore, "users", userId);
+    await updateDoc(userRef, { ...updateData, updatedAt: new Date() });
+    return true;
+  }
 }
 
-export default UserModel;
+// Fix: Named exports for easier importing
+export { UserModel, UserModel as default, UserModel as userModel };
+export const getUserByEmail = UserModel.getUserByEmail;
+export const createUser = UserModel.createUser;
+export const updateUser = UserModel.updateUser;

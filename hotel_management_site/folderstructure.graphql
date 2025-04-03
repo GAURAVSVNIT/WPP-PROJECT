@@ -1,10 +1,11 @@
 my-hotel-management/
 │── public/                      # Static assets (images, icons, etc.)
-│── pages/                      # Next.js pages (for API routes)
+│── pages/                       # Next.js pages (for API routes)
 │── ├── api/                     # API routes for server-side functions
 │   │   ├── auth/                # Authentication APIs
 │   │   │   ├── login.js         # Login API
-│   │   │   ├── register.js      # Registration API
+│   │   │   ├── registerUser.js      # Registration API
+│   │       ├── registerAgency.js    # Registration API for Agency
 │   │   ├── hotels/              # Hotel APIs
 │── src/                         # Main source folder
 │   │── app/                     # Next.js 13+ App Router
@@ -32,6 +33,10 @@ my-hotel-management/
 │   │   |    ├── settings/       # Dashboard Settings Page
 │   │   ├── recommendations/     # AI Recommendations
 │   │   └── orders/              # Order tracking
+│   │── firebase/               # Firebase configuration and authentication
+│   │   ├── functions/    # Firebase configuration
+│   │   ├── firebase.js              # Firebase authentication functions
+│   │   ├── firebaseAdmin.js       # Firebase configuration file
 │   │── components/              # Reusable UI components
 │   │   ├── Auth/                # Authentication components
 │   │   │    ├── Button.js
@@ -83,5 +88,5 @@ my-hotel-management/
 │   │   │   ├── chatbot.js       # Chatbot API
 │── .env.local                   # Environment Variables
 │── next.config.js               # Next.js Config
-│── package.json                  # Dependencies
-│── README.md                     # Documentation
+│── package.json                 # Dependencies
+│── README.md                    # Documentation

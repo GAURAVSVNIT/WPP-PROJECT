@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase"; // Ensure you have a correct Firebase config file
+import { auth } from "./firebase/firebase"; // Ensure you have a correct Firebase config file
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { firestore } from "@/lib/firebase"; // Import firestore separately
+import { firestore } from "./firebase/firebase"; // Import firestore separately
 import Navbar from "@/components/Home/Navbar.js";
 import MainSection from "@/components/Home/MainSection.js";
 import ContentSection from "@/components/Home/ContentSection.js";

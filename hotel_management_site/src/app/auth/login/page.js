@@ -98,9 +98,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { auth } from "../../firebase/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { firestore } from "@/lib/firebase";
+import { firestore } from "../../firebase/firebase";
 import Link from "next/link";
 import InputField from "@/components/Auth/InputField";
 import Button from "@/components/Auth/Button";
